@@ -1,0 +1,67 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Secrets (NEVER commit)
+secrets.json
+rpcs.json
+
+# Build artifacts
+artifacts/
+cache/
+typechain-types/
+coverage/
+coverage.json
+
+# OpenZeppelin upgrade state (contains legacy references)
+.openzeppelin/
+
+# IDE
+.vscode/
+.cursor/
+.claude/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Hardhat
+hardhat-deploy/
+
+# Working documents (internal)
+*.xlsx
+*.csv
+*.docx
+*.pdf
+!audits/*.pdf
+HANDOFF.md
+*-Review*.md
+*-Report*.md
+*-Changes*.md
+*-CopyPaste*.md
+*-Updated-Copy*.md
+Registry-Updates*.md
+
+# Internal curation checklist
+REPO-CURATION-CHECKLIST.md
+
+# Deployment config templates with fee fields
+deploy.config.json
+
+# Testnet parameters
+ignition/parametersSepolia.json
+ignition/parametersBase.json
+
+# Unaudited/undeployed contracts
+contracts/CiphexAffiliateTreasury.sol
+contracts/interfaces/ICiphexAffiliateTreasury.sol
+contracts/test/
+contracts/mocks/
+
+# Test for undeployed contracts
+test/AffiliateTreasury.test.ts
+
+# Bundler tooling
+scripts/deployCiphexMainnet.ts

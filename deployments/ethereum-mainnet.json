@@ -1,0 +1,89 @@
+{
+  "network": "ethereum-mainnet",
+  "chainId": 1,
+  "deployedAt": "2024-12-09",
+  "auditCommit": "4d04720c69dcde1053fe07ef7be4ad2a59ec271c",
+  "auditor": "CertiK",
+  "auditDate": "2024-12",
+  "contracts": {
+    "CiphexToken": {
+      "proxy": "0x18b33687d1c804Dd4ea6c82106e54923c23a652E",
+      "implementation": "0x00cB388c55e8A21AB73181c0A68583673c9b56d9",
+      "source": "contracts/Ciphex.sol",
+      "proxyAdmin": "owned by TimelockController",
+      "etherscanVerified": true,
+      "certikAudited": true
+    },
+    "CiphexPresale": {
+      "proxy": "0x28995579fdf4F1Ea01ba54b6F4f0524cE63Ff1bc",
+      "implementation": "0xf48fbaa8af52498f7b1e8f51f0a660d9023db4bc",
+      "source": "contracts/CiphexPresale.sol",
+      "proxyAdmin": "owned by TimelockController",
+      "etherscanVerified": true,
+      "certikAudited": true,
+      "status": "presale concluded"
+    },
+    "CiphexStaking_Primary": {
+      "proxy": "0x60f36DaeFEcB66EcB998655989Db45f12D08167d",
+      "implementation": "0xcAfdDC4be43101F5F044dB5A86E9852DFc1f6122",
+      "source": "contracts/CiphexStaking.sol",
+      "proxyAdmin": "owned by TimelockController",
+      "etherscanVerified": true,
+      "certikAudited": "derived from audited CiphexStaking.sol",
+      "note": "Primary staking pool; holds active staked CPX"
+    },
+    "CiphexStaking_PresaleLockup": {
+      "proxy": "0xc626b88a2fA52cfee8A695fE0779ecD83B943b21",
+      "implementation": "0x270368A5827d7f1740bEF66d09bE612FE03f921c",
+      "source": "contracts/CiphexStaking.sol",
+      "proxyAdmin": "owned by TimelockController",
+      "etherscanVerified": true,
+      "certikAudited": "derived from audited CiphexStaking.sol",
+      "note": "Presale lockup/vesting; 0 CPX balance"
+    },
+    "CiphexStaking_PrivateRound": {
+      "proxy": "0xfde5bbBFba12E55765b4F20176e7ac036b988478",
+      "implementation": "0xAD7fbcddF64Ce2238E7271360a2EDf5ccE706D5C",
+      "source": "contracts/CiphexStaking.sol",
+      "proxyAdmin": "owned by TimelockController",
+      "etherscanVerified": true,
+      "certikAudited": "derived from audited CiphexStaking.sol",
+      "note": "Private round lockup/vesting; 0 CPX balance"
+    },
+    "CiphexPayout": {
+      "proxy": "0x3c4fEFCDC575fc1a3b3b094E1C96E35E9094db6A",
+      "implementation": "0xcCE8DaE6314116846C1930D68FdfcC29870708BA",
+      "source": "contracts/CiphexPayout.sol",
+      "proxyAdmin": "owned by TimelockController",
+      "etherscanVerified": true,
+      "certikAudited": false,
+      "note": "Deployed July 2025; outside original CertiK scope; addendum in progress"
+    },
+    "TimelockController": {
+      "address": "0x567fAb3B2dFa635a4257FF742610D22E92c32400",
+      "minDelay": 172800,
+      "minDelayHuman": "48 hours",
+      "proposer": "Gnosis Safe",
+      "executor": "Gnosis Safe",
+      "canceller": "Gnosis Safe",
+      "etherscanVerified": true
+    },
+    "GnosisSafe": {
+      "address": "0xDC75B0c5D94816C27458ed62BEc10474A7Fc4231",
+      "version": "1.4.1",
+      "threshold": 3,
+      "owners": 5,
+      "etherscanVerified": true,
+      "note": "Standard Gnosis Safe; not a custom contract"
+    }
+  },
+  "deadAddress": {
+    "address": "0x000000000000000000000000000000000000dEaD",
+    "balance": "481454298000000000000000000",
+    "balanceHuman": "481,454,298 CPX",
+    "transferDate": "2026-01-01",
+    "transactionHashes": [
+      "See CipheX Document 03 for the four transfer transaction hashes"
+    ]
+  }
+}

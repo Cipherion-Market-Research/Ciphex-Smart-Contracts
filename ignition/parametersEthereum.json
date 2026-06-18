@@ -1,0 +1,19 @@
+{
+  "PresaleAndStaking": {
+    "usdc": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    "usdt": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+    "priceFeed": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419",
+    "multisignatureAddress": "0xDC75B0c5D94816C27458ed62BEc10474A7Fc4231",
+    "rewardIndex": 41920
+  },
+  "CiphexToken": {
+    "multisignatureAddress": "0xDC75B0c5D94816C27458ed62BEc10474A7Fc4231"
+  },
+  "TimeLock": {
+    "multisignatureAddress": "0xDC75B0c5D94816C27458ed62BEc10474A7Fc4231",
+    "lockDuration": 172800
+  },
+  "TransferOwnership": {
+    "multisignatureAddress": "0xDC75B0c5D94816C27458ed62BEc10474A7Fc4231"
+  }
+}

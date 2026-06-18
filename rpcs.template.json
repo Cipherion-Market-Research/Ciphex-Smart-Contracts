@@ -1,0 +1,5 @@
+{
+  "baseSepolia": "[your_rpc_url]",
+  "mainnet": "[your_rpc_url]",
+  "base": "[your_rpc_url]"
+}
