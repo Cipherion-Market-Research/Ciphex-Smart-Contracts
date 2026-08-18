@@ -59,6 +59,49 @@
       "certikAudited": false,
       "note": "Deployed July 2025; outside original CertiK scope; addendum in progress"
     },
+    "ContributionReserves": {
+      "proxy": "0x9c4cA71c20c52aE7A6055ff27Cc08E33A050040A",
+      "implementation": "0x9C433286cbCD11529e077d9C2Acd3f844FaF190c",
+      "source": "contracts/ContributionReserves.sol",
+      "proxyAdmin": "0xc781f4c3E556155F41022DCB725BF35242C8A5A6",
+      "proxyAdminOwner": "0x894e031a86690fe0425c262c794375fEAe34EaF8",
+      "functionalOwner": "0x894e031a86690fe0425c262c794375fEAe34EaF8",
+      "etherscanVerified": true,
+      "certikAudited": false,
+      "auditStatus": "pending (Hacken + CertiK, 2026)",
+      "deployedAt": "2026-08-01",
+      "note": "Fixed $0.20 CPX contributions: 70,000,000 CPX across three 30-day stages (7M / 21M / 42M), per-contribution maximum 100,000 CPX. Governed by the 3-of-5 contributions Safe (0x894e031a...), which owns this ProxyAdmin directly; this subsystem is NOT behind the TimelockController used by the token/presale/staking contracts.",
+      "upgradeHistory": [
+        {
+          "date": "2026-08-04",
+          "action": "reset a premature openContributions",
+          "tx": "0xfea73cefedb7d23ba9c8e7265b7bac7072d6f835e16686eb21da9b050cf334da",
+          "detail": "One atomic 3-of-5 Safe multisend: upgrade to a transient reset-capable implementation (0xc2959CEa1D281905dD8cBe5eeC651f003BB50828), call resetContributions() -- which returned all 70,000,000 CPX to the Safe and cleared the lifecycle state -- then downgrade back to this implementation (0x9C433286...). The reset-capable implementation is verified on Etherscan but is orphaned (no proxy points to it), holds no funds, has disabled initializers, and is inert.",
+          "resetCapableImplementation": "0xc2959CEa1D281905dD8cBe5eeC651f003BB50828"
+        }
+      ]
+    },
+    "CiphexContributionsStaking": {
+      "proxy": "0xbC9cAD582B4aC789a5980652EcA8bceb0ab6919C",
+      "implementation": "0x3926ddB8DDCA7F668B29CF763a40BbFa3D3c34f3",
+      "source": "contracts/CiphexContributionsStaking.sol",
+      "proxyAdmin": "0x1480a4d93E78D1FB30185Af6c7B1346b063FfB43",
+      "proxyAdminOwner": "0x894e031a86690fe0425c262c794375fEAe34EaF8",
+      "functionalOwner": "0x894e031a86690fe0425c262c794375fEAe34EaF8",
+      "etherscanVerified": true,
+      "certikAudited": false,
+      "auditStatus": "pending (Hacken + CertiK, 2026)",
+      "deployedAt": "2026-08-01",
+      "note": "Principal vesting for contributions (fixed cumulative releases; no reward state or reward operations). Paired to the contribution proxy (contributions() = 0x9c4cA71c...) and the CPX token (ciphex() = 0x18b33687...)."
+    },
+    "GnosisSafe_Contributions": {
+      "address": "0x894e031a86690fe0425c262c794375fEAe34EaF8",
+      "version": "1.4.1",
+      "threshold": 3,
+      "owners": 5,
+      "etherscanVerified": true,
+      "note": "3-of-5 multisig governing the 2026 contributions subsystem (ContributionReserves + CiphexContributionsStaking). Owns both contribution ProxyAdmins directly; distinct from the TimelockController-linked Safe (0xDC75B0c5...) used by the token/presale/staking system."
+    },
     "TimelockController": {
       "address": "0x567fAb3B2dFa635a4257FF742610D22E92c32400",
       "minDelay": 172800,
