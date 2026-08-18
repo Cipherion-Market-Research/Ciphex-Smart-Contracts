@@ -1,14 +1,14 @@
-# CipheX (CPX) Smart Contracts
+# Ciphex (CPX) Smart Contracts
 
-Audited, Ethereum-verified source code for the CipheX (CPX) ERC-20 token and supporting infrastructure.
+Audited, Ethereum-verified source code for the Ciphex (CPX) ERC-20 token and supporting infrastructure.
 
-Every `.sol` file in this repository is byte-identical to the Etherscan-verified source deployed on Ethereum mainnet. The core token, presale, and staking contracts were audited by CertiK in December 2024. The 2026 contributions subsystem (`ContributionReserves.sol`, `CiphexContributionsStaking.sol`) is deployed and Etherscan-verified and is currently **in scope for audit by Hacken and CertiK**; see [Contributions Subsystem](#contributions-subsystem-2026--pending-audit) below.
+Every `.sol` file in this repository is byte-identical to the Etherscan-verified source deployed on Ethereum mainnet. The core token, presale, and staking contracts were audited by CertiK in December 2024. The 2026 contributions subsystem (`ContributionReserves.sol`, `CiphexContributionsStaking.sol`) is deployed and Etherscan-verified and is currently **in scope for audit by CertiK and Hacken**; see [Contributions Subsystem](#contributions-subsystem-2026--pending-audit) below.
 
 ## Token at a Glance
 
 | Property | Value |
 |----------|-------|
-| **Token** | CipheX (CPX) |
+| **Token** | Ciphex (CPX) |
 | **Standard** | ERC-20, OpenZeppelin TransparentUpgradeableProxy (EIP-1967) |
 | **Chain** | Ethereum Mainnet |
 | **Decimals** | 18 |
@@ -49,7 +49,7 @@ A machine-readable version of this table is available at [`deployments/ethereum-
 
 ## Contributions Subsystem (2026) -- pending audit
 
-A separate contributions round deployed August 2026. It is governed by its **own** 3-of-5 Gnosis Safe (`0x894e031a86690fe0425c262c794375fEAe34EaF8`, v1.4.1), which owns both ProxyAdmins **directly** -- this subsystem is **not** behind the 48-hour TimelockController used by the contracts above. Both implementations are Etherscan-verified and byte-identical to the source in this repository, and both are **pending audit by Hacken and CertiK**.
+A separate contributions round deployed August 2026. It is governed by its **own** 3-of-5 Gnosis Safe (`0x894e031a86690fe0425c262c794375fEAe34EaF8`, v1.4.1), which owns both ProxyAdmins **directly** -- this subsystem is **not** behind the 48-hour TimelockController used by the contracts above. Both implementations are Etherscan-verified and byte-identical to the source in this repository, and both are **pending audit by CertiK and Hacken**.
 
 | Contract | Type | Address | Etherscan |
 |----------|------|---------|-----------|
@@ -187,4 +187,4 @@ See [LICENSE](./LICENSE). Brand assets and marks are the proprietary property of
 
 ## About
 
-CipheX is capital-markets infrastructure for the tokenized economy, bridging traditional finance and digital assets. CipheX is an ecosystem by [Cipherion](https://ciphex.io).
+The Ciphex Capital Ecosystem ("Ciphex") is a unified economic ecosystem focused on emerging enterprise tokenization and autonomous market systems, reducing complexity and improving efficiency across capital formation, commercialization, and market participation as these markets evolve into intelligent digital capital markets. Ciphex is an ecosystem by [Cipherion](https://ciphex.io).
