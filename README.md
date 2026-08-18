@@ -2,7 +2,7 @@
 
 Audited, Ethereum-verified source code for the CipheX (CPX) ERC-20 token and supporting infrastructure.
 
-Every `.sol` file in this repository is byte-identical to the Etherscan-verified source deployed on Ethereum mainnet and audited by CertiK in December 2024. There are zero differences between this repository and the on-chain state.
+Every `.sol` file in this repository is byte-identical to the Etherscan-verified source deployed on Ethereum mainnet. The core token, presale, and staking contracts were audited by CertiK in December 2024. The 2026 contributions subsystem (`ContributionReserves.sol`, `CiphexContributionsStaking.sol`) is deployed and Etherscan-verified and is currently **in scope for audit by Hacken and CertiK**; see [Contributions Subsystem](#contributions-subsystem-2026--pending-audit) below.
 
 ## Token at a Glance
 
@@ -44,6 +44,24 @@ All contracts are deployed on Ethereum mainnet. Proxy contracts use OpenZeppelin
 | Payout (implementation) | CiphexPayout.sol | `0xcCE8DaE6314116846C1930D68FdfcC29870708BA` | [View](https://etherscan.io/address/0xcCE8DaE6314116846C1930D68FdfcC29870708BA) |
 
 A machine-readable version of this table is available at [`deployments/ethereum-mainnet.json`](./deployments/ethereum-mainnet.json).
+
+---
+
+## Contributions Subsystem (2026) -- pending audit
+
+A separate contributions round deployed August 2026. It is governed by its **own** 3-of-5 Gnosis Safe (`0x894e031a86690fe0425c262c794375fEAe34EaF8`, v1.4.1), which owns both ProxyAdmins **directly** -- this subsystem is **not** behind the 48-hour TimelockController used by the contracts above. Both implementations are Etherscan-verified and byte-identical to the source in this repository, and both are **pending audit by Hacken and CertiK**.
+
+| Contract | Type | Address | Etherscan |
+|----------|------|---------|-----------|
+| **Contributions** (proxy) | TransparentUpgradeableProxy | `0x9c4cA71c20c52aE7A6055ff27Cc08E33A050040A` | [View](https://etherscan.io/address/0x9c4cA71c20c52aE7A6055ff27Cc08E33A050040A) |
+| Contributions (implementation) | ContributionReserves.sol | `0x9C433286cbCD11529e077d9C2Acd3f844FaF190c` | [View](https://etherscan.io/address/0x9C433286cbCD11529e077d9C2Acd3f844FaF190c) |
+| **Contributions Staking** (proxy) | TransparentUpgradeableProxy | `0xbC9cAD582B4aC789a5980652EcA8bceb0ab6919C` | [View](https://etherscan.io/address/0xbC9cAD582B4aC789a5980652EcA8bceb0ab6919C) |
+| Contributions Staking (implementation) | CiphexContributionsStaking.sol | `0x3926ddB8DDCA7F668B29CF763a40BbFa3D3c34f3` | [View](https://etherscan.io/address/0x3926ddB8DDCA7F668B29CF763a40BbFa3D3c34f3) |
+| **Contributions Safe** (multisig) | Safe v1.4.1 (3-of-5) | `0x894e031a86690fe0425c262c794375fEAe34EaF8` | [View](https://etherscan.io/address/0x894e031a86690fe0425c262c794375fEAe34EaF8) |
+
+**Parameters:** fixed $0.20 CPX price; 70,000,000 CPX allocation across three 30-day stages (7,000,000 / 21,000,000 / 42,000,000); per-contribution maximum 100,000 CPX. Staking applies fixed cumulative principal vesting with no reward state.
+
+**Upgrade history.** On 2026-08-04 a premature `openContributions` was reversed via a one-time atomic Safe multisend ([tx `0xfea7...334da`](https://etherscan.io/tx/0xfea73cefedb7d23ba9c8e7265b7bac7072d6f835e16686eb21da9b050cf334da)): the proxy was upgraded to a transient reset-capable implementation (`0xc2959CEa1D281905dD8cBe5eeC651f003BB50828`), `resetContributions()` returned all 70,000,000 CPX to the Safe and cleared the round state, and the proxy was downgraded back to the implementation listed above. The reset-capable implementation remains verified on Etherscan but is **orphaned and inert** -- no proxy references it, it holds no funds, and its initializers are disabled. The live implementation (`0x9C433286...`) does not expose that function.
 
 ---
 
@@ -106,13 +124,17 @@ Every contract in this repo is verified on Etherscan. You can independently conf
 
 ```
 contracts/
-  Ciphex.sol                  # ERC-20 token (upgradeable)
-  CiphexPresale.sol           # Presale/claim contract
-  CiphexStaking.sol           # Staking with vesting
-  CiphexPayout.sol            # Reward payout distribution
+  Ciphex.sol                      # ERC-20 token (upgradeable)
+  CiphexPresale.sol               # Presale/claim contract
+  CiphexStaking.sol               # Staking with vesting
+  CiphexPayout.sol                # Reward payout distribution
+  ContributionReserves.sol        # Fixed-price CPX contributions (3 stages) -- 2026, pending audit
+  CiphexContributionsStaking.sol  # Contributions principal vesting -- 2026, pending audit
   interfaces/
     ICiphexPresale.sol
     ICiphexStaking.sol
+    IContributionReserves.sol
+    ICiphexContributionsStaking.sol
 deployments/
   ethereum-mainnet.json       # Canonical address registry (machine-readable)
 ignition/
@@ -143,7 +165,7 @@ Requires Node.js >= 16 and a mainnet RPC endpoint for fork testing. Copy `rpcs.t
 ## Technology
 
 - Solidity 0.8.27
-- OpenZeppelin Contracts v5.0.1 (upgradeable)
+- OpenZeppelin Contracts v5.0.2 (upgradeable), pinned to the deployed version
 - Hardhat framework with Ignition deployment modules
 - TypeScript tests with Chai/Mocha
 
